@@ -11,6 +11,11 @@ const featuresRoutes: Routes = [
         loadComponent: () => import('./subjects/subjects'),
       },
       {
+        path: 'subjects/:id',
+        title: 'Subject Details',
+        loadComponent: () => import('./subjects/subject/subject'),
+      },
+      {
         path: '**',
         pathMatch: 'full',
         redirectTo: 'subjects',

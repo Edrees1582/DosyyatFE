@@ -1,0 +1,81 @@
+@if (subject.isLoading()) {
+<ngx-skeleton-loader
+  count="1"
+  appearance="line"
+  class="h-6 w-3/4 mb-3"
+></ngx-skeleton-loader>
+<ngx-skeleton-loader
+  count="2"
+  appearance="line"
+  class="h-4"
+></ngx-skeleton-loader>
+}@else if (subject.error()) {
+<p class="text-red-500">Error loading subject.</p>
+}@else {
+<div class="bg-white p-4 rounded shadow">
+  <h3 class="text-xl font-semibold mb-3">{{ subject.value()?.title }}</h3>
+  <p class="text-gray-600">{{ subject.value()?.description }}</p>
+</div>
+} @if (subject.value()) { @let subjectData = subject.value()!;
+<div class="mt-6">
+  <!-- Videos Section -->
+  @if (subjectData.videos.length) {
+  <div class="mb-6">
+    <h4 class="text-lg font-semibold mb-2">Videos</h4>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      @for (video of subjectData.videos; track video._id) {
+      <div class="bg-white p-4 rounded shadow">
+        <h5 class="font-semibold">{{ video.name }}</h5>
+        <a
+          [href]="video.link"
+          target="_blank"
+          class="text-blue-500 hover:underline mt-2 inline-block"
+          >Watch Video</a
+        >
+      </div>
+      }
+    </div>
+  </div>
+  }
+
+  <!-- Test Banks Section -->
+  @if (subjectData.testBanks.length) {
+  <div class="mb-6">
+    <h4 class="text-lg font-semibold mb-2">Test Banks</h4>
+    <ul class="bg-white p-4 rounded shadow divide-y divide-gray-200">
+      @for (testBank of subjectData.testBanks; track testBank._id) {
+      <li class="py-2">
+        <span>{{ testBank.name }}</span>
+        <a
+          [href]="testBank.link"
+          target="_blank"
+          class="text-blue-500 hover:underline"
+          >Download</a
+        >
+      </li>
+      }
+    </ul>
+  </div>
+  }
+
+  <!-- Notebooks Section -->
+  @if (subjectData.notebooks.length) {
+  <div>
+    <h4 class="text-lg font-semibold mb-2">Notebooks</h4>
+    <ul class="bg-white p-4 rounded shadow divide-y divide-gray-200">
+      @for (notebook of subjectData.notebooks; track notebook._id) {
+      <li class="py-2 flex justify-between items-center">
+        <span>{{ notebook.name }}</span>
+        <a
+          [href]="notebook.link"
+          target="_blank"
+          class="text-blue-500 hover:underline"
+          >Download</a
+        >
+      </li>
+      }
+    </ul>
+  </div>
+  }
+</div>
+}

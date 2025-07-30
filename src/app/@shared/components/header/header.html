@@ -1,0 +1,13 @@
+<header>
+  <nav class="flex justify-between items-center px-24 py-6">
+    <div>
+      <h1 class="text-3xl" routerLink="/subjects">Dosyyat</h1>
+    </div>
+    <div>
+      <mat-form-field>
+        <mat-label>Search subjects</mat-label>
+        <input matInput placeholder="Search..." [formControl]="searchControl" />
+      </mat-form-field>
+    </div>
+  </nav>
+</header>

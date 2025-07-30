@@ -1,1 +1,30 @@
-<p>subjects works!</p>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+  @for (subject of subjects.value(); track subject.id) {
+  <div
+    class="bg-white p-4 rounded shadow subject"
+    (click)="navigateToSubject(subject.id)"
+    class="bg-white p-4 rounded shadow subject transition-transform duration-200 hover:scale-105 hover:shadow-lg cursor-pointer"
+  >
+    <h3 class="text-xl font-semibold mb-3">{{ subject.title }}</h3>
+    <p class="text-gray-600 subject-description">{{ subject.description }}</p>
+  </div>
+  }@empty { @if(subjects.isLoading()) { @for (item of [1,2,3,4,5,6,7,8,9]; track
+  item) {
+  <div class="bg-white p-4 rounded shadow">
+    <ngx-skeleton-loader
+      count="1"
+      appearance="line"
+      class="h-6 w-3/4 mb-3"
+    ></ngx-skeleton-loader>
+    <ngx-skeleton-loader
+      count="2"
+      appearance="line"
+      class="h-4"
+    ></ngx-skeleton-loader>
+  </div>
+  } } @else if(subjects.error()) {
+  <p class="text-red-500">Error loading subjects.</p>
+  } @else {
+  <p class="text-gray-500">No subjects found.</p>
+  } }
+</div>
